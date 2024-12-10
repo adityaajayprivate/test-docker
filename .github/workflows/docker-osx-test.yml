@@ -14,13 +14,13 @@ jobs:
           systemsetup -setremotelogin on
           echo $whoami
           ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
-          if ![ echo $? -eq 0 ]; then
+          if ! echo $? -eq 0 ; then
             echo "SSH Key generation failed. Exiting..."
             exit 1
           fi
           echo "SSH Keys generated successfully"
           echo $SSH_CLIENT_PUBLIC_KEY >> ~/.ssh/authorized_keys
-          sudo shutdown -s +$(echo SHUTDOWN_IN_MINS)
+          sudo shutdown -s +$(echo SHUTDOWN_IN_MINS)m
           echo "The system will shut down in: $SHUTDOWN_IN_MINS minutes"
           echo "Use $(whoami)@$(curl ifconfig.me) to authenticate"
           echo "Shutdown in $SHUTDOWN_IN_MINS minutes"
