@@ -1,0 +1,24 @@
+name: Docker OSX Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mac_test:
+    name: Expose OSX
+    runs-on: macos-13
+    steps:
+      - name: Expose ssh and timeout
+        shell: bash
+        run: |
+          systemsetup -setremotelogin on
+          echo $whoami
+          ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
+          if ![ echo $? -eq 0 ]; then
+            echo "SSH Key generation failed. Exiting..."
+            exit 1
+          fi
+          echo "SSH Keys generated successfully"
+          echo $SSH_CLIENT_PUBLIC_KEY >> ~/.ssh/authorized_keys
+          sudo shutdown -h $SHUTDOWN_IN_HRS -m $SHUTDOWN_IN_MINS
+          sleep $(echo $SHUTDOWN_IN_HRS)h
