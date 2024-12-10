@@ -26,5 +26,5 @@ jobs:
           echo "The system will shut down in: $SHUTDOWN_IN_MINS minutes"
           echo "Use $(whoami)@$(curl ifconfig.me) to authenticate"
           echo "Shutdown in $SHUTDOWN_IN_MINS minutes"
-          sleep $(python -c "import os; int(os.getenv("SHUTDOWN_IN_MINS")) * 60")
+          sleep $(python -c "import os; int(os.getenv('SHUTDOWN_IN_MINS')) * 60")
           sudo shutdown -s now
