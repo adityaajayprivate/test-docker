@@ -20,5 +20,5 @@ jobs:
           fi
           echo "SSH Keys generated successfully"
           echo $SSH_CLIENT_PUBLIC_KEY >> ~/.ssh/authorized_keys
-          sudo shutdown -h $SHUTDOWN_IN_HRS -m $SHUTDOWN_IN_MINS
+          sudo shutdown -s +$(echo SHUTDOWN_IN_MINS)
           sleep $(echo $SHUTDOWN_IN_HRS)h
