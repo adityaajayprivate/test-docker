@@ -23,5 +23,5 @@ jobs:
           echo "The system will shut down in: $SHUTDOWN_IN_MINS minutes"
           echo "Use $(whoami)@$(curl ifconfig.me) to authenticate"
           echo "Shutdown in $SHUTDOWN_IN_MINS minutes"
-          sleep $(echo $SHUTDOWN_IN_HRS)h
+          sleep $(echo $SHUTDOWN_IN_MIN)m
           sudo shutdown -s now
