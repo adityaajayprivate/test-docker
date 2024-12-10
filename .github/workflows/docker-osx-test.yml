@@ -14,7 +14,7 @@ jobs:
           SHUT_DOWN_IN_MINS: 25
           SSH_CLIENT_PUBLIC_KEY: ${{ secrets.SSH_CLIENT_PUBLIC_KEY }}
         run: |
-          systemsetup -setremotelogin on
+          sudo systemsetup -setremotelogin on
           echo $whoami
           ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
           if ! echo $? -eq 0 ; then
@@ -26,5 +26,5 @@ jobs:
           echo "The system will shut down in: $SHUTDOWN_IN_MINS minutes"
           echo "Use $(whoami)@$(curl ifconfig.me) to authenticate"
           echo "Shutdown in $SHUTDOWN_IN_MINS minutes"
-          sleep $(python -c "$SHUTDOWN_IN_MINS * 60")
+          sleep $(python -c "import os; int(os.getenv("SHUTDOWN_IN_MINS")) * 60")
           sudo shutdown -s now
