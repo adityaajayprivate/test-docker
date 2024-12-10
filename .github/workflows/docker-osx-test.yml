@@ -11,7 +11,7 @@ jobs:
       - name: Expose ssh and timeout
         shell: bash
         env:
-          SHUT_DOWN_IN_MINS: $SHUTDOWN_IN_MINS
+          SHUT_DOWN_IN_MINS: ${{ vars.SHUTDOWN_IN_MINS }}
           SSH_CLIENT_PUBLIC_KEY: ${{ secrets.SSH_CLIENT_PUBLIC_KEY }}
         run: |
           echo $SHUT_DOWN_IN_MINS
