@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Expose ssh and timeout
         shell: bash
+        env:
+          SHUT_DOWN_IN_MINS: 25
+          SSH_CLIENT_PUBLIC_KEY: ${{ secrets.SSH_CLIENT_PUBLIC_KEY }}
         run: |
           systemsetup -setremotelogin on
           echo $whoami
